@@ -20,6 +20,7 @@ function show_git_info($branch) {
     $info = "`e[94m${pretty_path} `e[96m${branch} "
 
     $git_porcelain = $(git status --porcelain --branch --ahead-behind)
+    $git_stash_count = $(git stash list)
 
     $info += "`e[32m$(($git_porcelain | Select-String "^M").Length)|"
     $info += "`e[32m$(($git_porcelain | Select-String "^R").Length)|"
@@ -39,6 +40,10 @@ function show_git_info($branch) {
         if ($behind) {
             $info += "`e[34m$(${behind}.Matches.Groups[1].Value)↓"
         }
+    }
+
+    if ($git_stash_count) {
+        $info += " `e[34m$(${git_stash_count}.Length)✗"
     }
 
     return "${info}"

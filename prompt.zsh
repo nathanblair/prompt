@@ -35,7 +35,8 @@ function show_git_info() {
 
   echo -n "${git_relative_path/#$USER/~}"
 
-  git_porcelain="$(git status --porcelain 2>/dev/null)"
+  local git_porcelain="$(git status --porcelain --branch --ahead-behind 2>/dev/null)"
+  local git_stash_count="$(git stash list | grep "" -c)"
 
   echo -n " %{%F{cyan}%}${1} "
   echo -n "%{%F{green}%}$(printf "${git_porcelain}" | grep -c '^A')|"
@@ -46,9 +47,8 @@ function show_git_info() {
   echo -n "%{%F{blue}%}$(printf "${git_porcelain}" | grep -c '^??')|"
   echo -n "%{%F{red}%}$(printf "${git_porcelain}" | grep -c '^ D')"
 
-  local ahead_behind=$(git status --porcelain --branch --ahead-behind)
-  local ahead=$(echo -n "${ahead_behind}" | awk '/ahead/ {print substr($4,1,length($4)-1)}')
-  local behind=$(echo -n "${ahead_behind}" | awk '/behind/ {print substr($4,1,length($4)-1)}')
+  local ahead=$(echo -n "${git_porcelain}" | awk '/ahead/ {print substr($4,1,length($4)-1)}')
+  local behind=$(echo -n "${git_porcelain}" | awk '/behind/ {print substr($4,1,length($4)-1)}')
 
   if [ "${ahead}" ] || [ "${behind}" ]; then
     echo -n " "
@@ -58,6 +58,10 @@ function show_git_info() {
     if [ "${behind}" -gt 0 ]; then
       echo -n "%{%F{blue}%}${behind}↓"
     fi
+  fi
+
+  if [ "${git_stash_count}" -gt 0 ]; then
+    echo -n " %{%F{blue}%}${git_stash_count}✗"
   fi
 }
 

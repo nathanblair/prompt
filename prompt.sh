@@ -19,6 +19,7 @@ function show_git_info() {
   printf "${git_relative_path//$USER/\~}"
 
   git_porcelain="$(git status --porcelain --branch --ahead-behind)"
+  git_stash_count="$(git stash list | grep "" -c)"
 
   printf " \[\e[96m\]${1} "
   printf "\[\e[92m\]$(printf "${git_porcelain}" | grep -c '^A')|"
@@ -40,6 +41,10 @@ function show_git_info() {
     if [ "${behind}" ] && [ "${behind}" -gt 0 ]; then
       printf "\[\e[95m\]${behind}↓"
     fi
+  fi
+
+  if [ "${git_stash_count}" -gt 0 ]; then
+    echo -n " %{%F{blue}%}${git_stash_count}✗"
   fi
 }
 
