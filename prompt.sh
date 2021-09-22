@@ -26,9 +26,9 @@ function show_git_info() {
   printf "\[\e[92m\]$(printf "${git_porcelain}" | grep -c '^R')|"
   printf "\[\e[92m\]$(printf "${git_porcelain}" | grep -c '^M')|"
   printf "\[\e[91m\]$(printf "${git_porcelain}" | grep -c '^D')|"
-  printf "\[\e[97m\]$(printf "${git_porcelain}" | grep -c '^ M')|"
+  printf "\[\e[97m\]$(printf "${git_porcelain}" | grep -c '^.M')|"
   printf "\[\e[94m\]$(printf "${git_porcelain}" | grep -c '^??')|"
-  printf "\[\e[91m\]$(printf "${git_porcelain}" | grep -c '^ D')"
+  printf "\[\e[91m\]$(printf "${git_porcelain}" | grep -c '^.D')"
 
   ahead=$(printf "${git_porcelain}" | awk '/ahead/ {print substr($4,1,length($4)-1)}')
   behind=$(printf "${git_porcelain}" | awk '/behind/ {print substr($4,1,length($4)-1)}')

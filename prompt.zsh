@@ -43,9 +43,9 @@ function show_git_info() {
   echo -n "%{%F{green}%}$(printf "${git_porcelain}" | grep -c '^R')|"
   echo -n "%{%F{green}%}$(printf "${git_porcelain}" | grep -c '^M')|"
   echo -n "%{%F{red}%}$(printf "${git_porcelain}" | grep -c '^D')|"
-  echo -n "%{%F{white}%}$(printf "${git_porcelain}" | grep -c '^ M')|"
+  echo -n "%{%F{white}%}$(printf "${git_porcelain}" | grep -c '^.M')|"
   echo -n "%{%F{blue}%}$(printf "${git_porcelain}" | grep -c '^??')|"
-  echo -n "%{%F{red}%}$(printf "${git_porcelain}" | grep -c '^ D')"
+  echo -n "%{%F{red}%}$(printf "${git_porcelain}" | grep -c '^.D')"
 
   local ahead=$(echo -n "${git_porcelain}" | awk '/ahead/ {print substr($4,1,length($4)-1)}')
   local behind=$(echo -n "${git_porcelain}" | awk '/behind/ {print substr($4,1,length($4)-1)}')
