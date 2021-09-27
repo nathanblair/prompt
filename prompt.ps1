@@ -24,9 +24,9 @@ function show_git_info($branch) {
     $info += "`e[32m$(($git_porcelain | Select-String -CaseSensitive "^R").Length)|"
     $info += "`e[32m$(($git_porcelain | Select-String -CaseSensitive "^A").Length)|"
     $info += "`e[31m$(($git_porcelain | Select-String -CaseSensitive "^D").Length)|"
-    $info += "`e[97m$(($git_porcelain | Select-String -CaseSensitive "^?M").Length)|"
+    $info += "`e[97m$(($git_porcelain | Select-String -CaseSensitive "^.M").Length)|"
     $info += "`e[34m$(($git_porcelain | Select-String -CaseSensitive "^\?\?").Length)|"
-    $info += "`e[31m$(($git_porcelain | Select-String -CaseSensitive "^?D").Length)"
+    $info += "`e[31m$(($git_porcelain | Select-String -CaseSensitive "^.D").Length)"
 
     $ahead = $git_porcelain | Select-String "ahead (.+)]"
     $behind = $git_porcelain | Select-String "behind (.+)]"
