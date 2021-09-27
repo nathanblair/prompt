@@ -28,8 +28,8 @@ function show_git_info($branch) {
     $info += "`e[34m$(($git_porcelain | Select-String -CaseSensitive "^\?\?").Length)|"
     $info += "`e[31m$(($git_porcelain | Select-String -CaseSensitive "^.D").Length)"
 
-    $ahead = $git_porcelain | Select-String "ahead (.+)]"
-    $behind = $git_porcelain | Select-String "behind (.+)]"
+    $ahead = $git_porcelain | Select-String "ahead (\d+)"
+    $behind = $git_porcelain | Select-String "behind (\d+)"
     if ($ahead -or $behind) {
         $info += " "
         if ($ahead) {
