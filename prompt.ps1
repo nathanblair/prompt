@@ -17,18 +17,16 @@ function show_git_info($branch) {
     $git_relative_path = $(Get-Location) -replace [Regex]::Escape("${git_toplevel}\"), ""
     $pretty_path = $(user_path_replace "${git_relative_path}") -replace '/', '\'
 
+    $git_porcelain = git status --porcelain --branch --ahead-behind
+
     $info = "`e[94m${pretty_path} `e[96m${branch} "
-
-    $git_porcelain = $(git status --porcelain --branch --ahead-behind)
-    $git_stash_list = $((git stash list | Measure-Object -Line).Lines)
-
-    $info += "`e[32m$(($git_porcelain | Select-String "^M").Length)|"
-    $info += "`e[32m$(($git_porcelain | Select-String "^R").Length)|"
-    $info += "`e[32m$(($git_porcelain | Select-String "^A").Length)|"
-    $info += "`e[31m$(($git_porcelain | Select-String "^D").Length)|"
-    $info += "`e[97m$(($git_porcelain | Select-String "^?M").Length)|"
-    $info += "`e[34m$(($git_porcelain | Select-String "^\?\?").Length)|"
-    $info += "`e[31m$(($git_porcelain | Select-String "^?D").Length)"
+    $info += "`e[32m$(($git_porcelain | Select-String -CaseSensitive "^M").Length)|"
+    $info += "`e[32m$(($git_porcelain | Select-String -CaseSensitive "^R").Length)|"
+    $info += "`e[32m$(($git_porcelain | Select-String -CaseSensitive "^A").Length)|"
+    $info += "`e[31m$(($git_porcelain | Select-String -CaseSensitive "^D").Length)|"
+    $info += "`e[97m$(($git_porcelain | Select-String -CaseSensitive "^?M").Length)|"
+    $info += "`e[34m$(($git_porcelain | Select-String -CaseSensitive "^\?\?").Length)|"
+    $info += "`e[31m$(($git_porcelain | Select-String -CaseSensitive "^?D").Length)"
 
     $ahead = $git_porcelain | Select-String "ahead (.+)]"
     $behind = $git_porcelain | Select-String "behind (.+)]"
@@ -42,6 +40,7 @@ function show_git_info($branch) {
         }
     }
 
+    $git_stash_list = (git stash list | Measure-Object -Line).Lines
     if ($git_stash_list -gt 0) {
         $info += " `e[34m${git_stash_list}✗"
     }
@@ -74,7 +73,7 @@ function right_prompt() {
         $right_message += "${execution_time}s"
     }
 
-    $window_host = $(Get-Host)
+    $window_host = Get-Host
     $original_position = $window_host.UI.RawUI.CursorPosition
     $new_position = $original_position
 
