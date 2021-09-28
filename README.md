@@ -48,3 +48,5 @@ prompt default 0|0|0|0|1|1|1 > sleep 3
 prompt default 0|0|0|0|1|1|1 >                                              3s
 prompt default 0|0|0|0|1|1|1 >
 ```
+
+![pwsh](./pics/pwsh.png)
