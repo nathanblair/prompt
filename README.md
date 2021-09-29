@@ -4,6 +4,14 @@ A lightweight prompt consistent across sh/dash/ash, zsh, and pwsh.
 
 ![prompt](./pics/prompt.png)
 
+# Installing and Using
+
+I don't use any shell plugin frameworks (zgen/zplug/etc) to manage my prompt. My dotfiles are set up to include this repo as a submodule. When sourcing the shell profile, if this repo path does not exist, the shell profile runs `git submodule init --recursive` to clone in my shell plugins.
+
+Then its just a matter of sourcing the relevant prompt file from the shell profile.
+
+For an example see my [`dotfiles`](https://github.com/nathanblair/dotfiles) and perhaps as a more specific example, my [`zshrc`](https://github.com/nathanblair/dotfiles/blob/default/.zshrc).
+
 # Section Explanations
 
 ## Last Exit Status
