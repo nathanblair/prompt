@@ -2,6 +2,8 @@
 
 A lightweight prompt consistent across sh/dash/ash, zsh, and pwsh.
 
+![prompt](./pics/prompt.png)
+
 # Section Explanations
 
 ## Last Exit Status
@@ -51,22 +53,3 @@ Shows the prompt character (`>`)
 ## Right Prompt
 
 Shows last command execution time in seconds if duration was longer than 1 second.
-
-# Examples
-
-## `sh`
-
-## `zsh`
-
-## `pwsh`
-
-```
-prompt default 0|0|0|0|0|1|0 > g
-## default...origin/default
-?? README.md
-prompt default 0|0|0|0|0|1|0 > sleep 3
-prompt default 0|0|0|0|0|1|0 >                                           3s
-prompt default 0|0|0|0|0|1|0 >
-```
-
-![pwsh](./pics/pwsh.png)
