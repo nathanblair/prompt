@@ -36,7 +36,12 @@ If not in a version-controlled directory, this section will show the current sho
 
 If the current path is a version-controlled directory, this section will show the `dirname` of the path (suggesting the repository name) followed by the current branch.
 
-Then, multiple columns will enumerate `git` state.
+- `git` state.
+
+    - The number at each index indicates the number of files that correspond to that state
+    - The 4 left-most columns show staged operations
+    - The 3 right-most columns track unstaged operations
+    - See [here](https://www.git-scm.com/docs/git-status#_short_format) for more information about the columns output
 
 1. New entry **A**dded
 2. **R**enamed
@@ -45,12 +50,6 @@ Then, multiple columns will enumerate `git` state.
 5. **M**odified
 6. **??** New file
 7. **D**eleted
-
-- The number at each index indicates the number of files that correspond to that state
-- The 4 left-most columns show staged operations.
-- The 3 right-most columns track unstaged operations.
-
-See [here](https://www.git-scm.com/docs/git-status#_short_format) for more information about the columns output.
 
 - `git` stash
 
