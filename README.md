@@ -54,6 +54,12 @@ See [here](https://www.git-scm.com/docs/git-status#_short_format) for more infor
 
 - `git` stash
 
+There is a section for contextually showing the status of the `git stash`.
+
+- `git` ahead/behind
+
+Will show number of commits ahead and/or behind the remote tracking branch when applicable.
+
 ## Prompt
 
 Shows the prompt character (`>`)
