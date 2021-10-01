@@ -1,18 +1,18 @@
-function clean() {
+clean() {
   printf "\[\e[0m\]"
 }
 
-function last_command_status() {
+last_command_status() {
   if [ $1 -ne 0 ]; then printf "\[\e[31m\]($1)"; fi
 }
 
-function host_info() {
+host_info() {
   if [ -n "${SSH_CONNECTION}" ]; then
     echo -n "\[\e[95m\][\[\e[0m\]\h\[\e[95m\]]"
   fi
 }
 
-function show_git_info() {
+show_git_info() {
   git_toplevel="$(dirname $(git rev-parse --show-toplevel))"
   git_relative_path="${PWD##$git_toplevel/}"
 
@@ -48,17 +48,17 @@ function show_git_info() {
   fi
 }
 
-function current_dir_info() {
+current_dir_info() {
   printf '\[\e[34m\]'
   b=$(git branch --show-current 2>/dev/null || printf "")
   if [ "${b}" = "" ]; then printf "\w"; else show_git_info "${b}"; fi
 }
 
-function prompt_char() {
+prompt_char() {
   if [ $(id -u) -eq 0 ]; then printf "#"; else printf ">"; fi
 }
 
-function my_prompt() {
+my_prompt() {
   last_exit_code=$?
   clean
   last_command_status $last_exit_code
@@ -74,4 +74,4 @@ function my_prompt() {
   printf " "
 }
 
-export PS1='$(my_prompt)'
+export PS1=$(my_prompt)
